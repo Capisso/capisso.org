@@ -3,7 +3,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>
+        @section('title')
+        Capisso
+        @show
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -17,17 +21,6 @@
         }
     </style>
     <link rel="stylesheet" href="/assets/css/bootstrap-responsive.min.css"/>
-
-    <!--[if lt IE 9]>
-    <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="../assets/ico/favicon.png">
 </head>
 
 <body>
@@ -59,7 +52,8 @@
 
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href="">Login</a></li>
+                    <li class="{{(Request::is('account/login') ? 'active' : '')}}"><a href="/account/login">Login</a></li>
+                    <li class="{{(Request::is('account/register') ? 'active' : '')}}"><a href="/account/register">Register</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

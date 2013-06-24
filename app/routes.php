@@ -24,3 +24,6 @@ Route::get('/vmpanel/{sub}', function($sub) {
 
     return View::make("products/vmpanel/$sub");
 });
+
+Route::controller('account', 'AccountController');
+Route::controller('legal', 'LegalController');

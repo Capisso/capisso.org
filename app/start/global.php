@@ -11,6 +11,9 @@
 |
 */
 
+Event::listen('user.register', 'UserHandler@onRegister');
+Event::listen('user.forgot', 'UserHandler@onForgot');
+
 ClassLoader::addDirectories(array(
 
 	app_path().'/commands',
