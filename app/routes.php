@@ -11,7 +11,16 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function () {
+    return View::make('layouts/master');
+});
+
+Route::get('/irc', function() {
+    return View::make('site/irc');
+});
+
+Route::get('/vmpanel/{sub}', function($sub) {
+    if(!in_array($sub, array('overview', 'licensing', 'features', 'screenshots'))) App::abort(404);
+
+    return View::make("products/vmpanel/$sub");
 });
