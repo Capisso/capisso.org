@@ -19,6 +19,19 @@
 
         @foreach($responses as $response)
 
+
+        <div class="well">
+            <div class="row-fluid">
+                <div class="span2">
+                    <img src="http://www.gravatar.com/avatar/{{$response->author->gravatar()}}?s=128" alt=""/>
+                    <p class="text-center">{{$response->author->username}}</p>
+                </div>
+                <div class="span10">
+                    {{{$response->body}}}
+                </div>
+            </div>
+        </div>
+
         @endforeach
 
         <div class="row">

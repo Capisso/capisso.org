@@ -10,6 +10,11 @@
 
         <h2>Your Capisso Licenses</h2>
 
+        <div class="pull-right">
+            <a href="/panel/licenses/create" class="btn btn-success">Purchase License</a>
+        </div>
+        <div class="clearfix"></div>
+
         @if(count($licenses) == 0)
 
         <p>You don't currently have any licenses with Capisso, <a href="/panel/licenses/create">consider buying one?</a></p>

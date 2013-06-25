@@ -9,6 +9,7 @@ use Validator;
 use Input;
 use Sentry;
 use Ticket;
+use TicketResponse;
 
 class SupportController extends \BaseController {
 
@@ -102,7 +103,30 @@ class SupportController extends \BaseController {
      * @return Response
      */
     public function update($id) {
-        //
+        $rules = array(
+            'body' => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()) {
+            return Redirect::action('Panel\SupportController@create')->withErrors($validator);
+        }
+
+        $ticket = Ticket::find($id);
+        if($ticket->user_id != Sentry::getUser()->id) {
+            return Redirect::action('Panel\SupportController@index');
+        }
+
+        $response = new TicketResponse();
+
+        $response->body = Input::get('body');
+        $response->user_id = Sentry::getUser()->id;
+        $response->ticket_id = $ticket->id;
+
+
+        $ticket->responses()->save($response);
+
+        return Redirect::action('Panel\SupportController@show', array($ticket->id));
     }
 
     /**
