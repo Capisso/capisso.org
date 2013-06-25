@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return View::make('layouts/master');
+    return View::make('site/home');
 });
 
 Route::get('/irc', function() {
@@ -27,3 +27,15 @@ Route::get('/vmpanel/{sub}', function($sub) {
 
 Route::controller('account', 'AccountController');
 Route::controller('legal', 'LegalController');
+
+Route::group(array('prefix' => 'panel', 'before' => 'auth'), function() {
+
+    Route::get('/', function() {
+        return View::make('panel/index');
+    });
+
+    Route::resource('licenses', 'Panel\LicenseController');
+    Route::resource('support', 'Panel\SupportController');
+
+
+});

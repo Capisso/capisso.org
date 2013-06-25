@@ -19,6 +19,14 @@
             padding-top: 60px;
             padding-bottom: 40px;
         }
+        select, textarea, input[type="text"], input[type="password"],
+        input[type="datetime"], input[type="datetime-local"], input[type="date"],
+        input[type="month"], input[type="time"], input[type="week"],
+        input[type="number"], input[type="email"], input[type="url"],
+        input[type="search"], input[type="tel"], input[type="color"],
+        .uneditable-input {
+            color: #2C3E50;
+        }
     </style>
     <link rel="stylesheet" href="/assets/css/bootstrap-responsive.min.css"/>
 </head>
@@ -33,7 +41,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="#">Capisso</a>
+            <a class="brand" href="/">Capisso</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="{{(Request::is('/') ? 'active' : '')}}"><a href="/">Home</a></li>
@@ -52,8 +60,13 @@
 
                 </ul>
                 <ul class="nav pull-right">
+                    @if(Sentry::check())
+                    <li><a href="/panel">Welcome {{{Sentry::getUser()->username}}}!</a></li>
+                    <li><a href="/account/logout">Logout</a></li>
+                    @else
                     <li class="{{(Request::is('account/login') ? 'active' : '')}}"><a href="/account/login">Login</a></li>
                     <li class="{{(Request::is('account/register') ? 'active' : '')}}"><a href="/account/register">Register</a></li>
+                    @endif
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
