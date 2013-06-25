@@ -73,11 +73,23 @@ class LicenseController extends \BaseController {
             'customer' => $customer->id
         ));
 
+        // Save the Stripe customer ID
         $user = User::where('id', Sentry::getUser()->id)->first();
 
         $user->stripe_customer_id = $customer->id;
 
         $user->save();
+
+        // Create the license
+        $license = new License();
+
+        $license->domain = $domain;
+        $license->user_id = Sentry::getUser()->id;
+        $license->panel = true;
+        $license->nodes = 1;
+        $license->active = true;
+
+        $license->save();
 
         return Redirect::to('panel/license/thanks');
 

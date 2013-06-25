@@ -4,6 +4,9 @@ namespace Panel;
 
 use View;
 use Response;
+use Redirect;
+use Validator;
+use Input;
 use Sentry;
 use Ticket;
 
@@ -36,7 +39,25 @@ class SupportController extends \BaseController {
      * @return Response
      */
     public function store() {
-        //
+        $rules = array(
+            'title' => 'required|max:255',
+            'body' => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()) {
+            return Redirect::action('Panel\SupportController@create')->withErrors($validator);
+        }
+
+        $ticket = new Ticket();
+
+        $ticket->title = Input::get('title');
+        $ticket->body = Input::get('body');
+        $ticket->user_id = Sentry::getUser()->id;
+
+        $ticket->save();
+
+        return Redirect::action('Panel\SupportController@show', array($ticket->id));
     }
 
     /**
@@ -47,7 +68,19 @@ class SupportController extends \BaseController {
      * @return Response
      */
     public function show($id) {
-        //
+        $ticket = Ticket::find($id);
+        if($ticket->user_id != Sentry::getUser()->id) {
+            return Redirect::action('Panel\SupportController@index');
+        }
+
+        $author = $ticket->author;
+        $responses = $ticket->responses;
+
+        return View::make('panel/support/show', array(
+            'ticket' => $ticket,
+            'author' => $author,
+            'responses' => $responses
+        ));
     }
 
     /**

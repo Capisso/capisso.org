@@ -11,6 +11,18 @@
 |
 */
 
+Str::macro('ordinal', function($num) {
+    if (!in_array(($num % 100),array(11,12,13))){
+        switch ($num % 10) {
+            // Handle 1st, 2nd, 3rd
+            case 1:  return $num.'st';
+            case 2:  return $num.'nd';
+            case 3:  return $num.'rd';
+        }
+    }
+    return $num.'th';
+});
+
 Route::get('/', function () {
     return View::make('site/home');
 });
@@ -34,6 +46,7 @@ Route::group(array('prefix' => 'panel', 'before' => 'auth'), function() {
         return View::make('panel/index');
     });
 
+    Route::get('licenses/thanks', function() { return View::make('panel/licenses/thanks'); });
     Route::resource('licenses', 'Panel\LicenseController');
     Route::resource('support', 'Panel\SupportController');
 

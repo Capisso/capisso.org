@@ -12,10 +12,10 @@
 
         {{ Form::open(array('action' => 'Panel\SupportController@store')) }}
             <div class="controls controls-row">
-                <input id="name" name="name" type="text" class="span6" placeholder="Ticket Title">
+                <input id="name" name="title" type="text" class="span6" placeholder="Ticket Title">
             </div>
             <div class="controls">
-                <textarea id="message" name="message" class="span6" placeholder="Describe your request or issue." rows="5"></textarea>
+                <textarea id="message" name="body" class="span6" placeholder="Describe your request or issue." rows="5"></textarea>
             </div>
 
             <div class="controls">
