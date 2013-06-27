@@ -23,13 +23,8 @@ Str::macro('ordinal', function($num) {
     return $num.'th';
 });
 
-Route::get('/', function () {
-    return View::make('site/home');
-});
-
-Route::get('/irc', function() {
-    return View::make('site/irc');
-});
+Route::get('/', 'HomeController@getIndex');
+Route::get('/irc', 'HomeController@getIrc');
 
 Route::get('/vmpanel/{sub}', function($sub) {
     if(!in_array($sub, array('overview', 'licensing', 'features', 'screenshots'))) App::abort(404);
