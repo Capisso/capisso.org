@@ -7,7 +7,7 @@
 <h2>{{{ $subject }}}</h2>
 
 <div>
-    <p>From: {{{ $name }}} <{{{ $email }}}></p>
+    <p>From: {{{ $name }}} &lt;{{{ $email }}}&gt;</p>
 
     <hr>
 
