@@ -25,6 +25,8 @@ Str::macro('ordinal', function($num) {
 
 Route::get('/', 'HomeController@getIndex');
 Route::get('/irc', 'HomeController@getIrc');
+Route::get('/contact', 'HomeController@getContact');
+Route::post('/contact', 'HomeController@postContact');
 
 Route::get('/vmpanel/{sub}', function($sub) {
     if(!in_array($sub, array('overview', 'licensing', 'features', 'screenshots'))) App::abort(404);

@@ -57,6 +57,7 @@
                     </li>
                     <li class="{{(Request::is('company') ? 'active' : '')}}"><a href="/company">Company</a></li>
                     <li class="{{(Request::is('irc') ? 'active' : '')}}"><a href="/irc">IRC</a></li>
+                    <li class="{{(Request::is('contact') ? 'active' : '')}}"><a href="/contact">Contact</a></li>
 
                 </ul>
                 <ul class="nav pull-right">
