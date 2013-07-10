@@ -19,7 +19,7 @@ class SupportController extends \BaseController {
      * @return Response
      */
     public function index() {
-        $tickets = Ticket::where('user_id', Sentry::getUser()->id)->get();
+        $tickets = Ticket::where('user_id', Sentry::getUser()->id)->orderBy('created_at', 'desc')->get();
 
         return View::make('panel/support/index', array('tickets' => $tickets));
     }
