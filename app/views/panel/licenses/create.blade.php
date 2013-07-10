@@ -35,9 +35,9 @@
                 <script
                     src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
                     data-key="{{Config::get('stripe.public')}}"
-                    data-amount="10000"
+                    data-amount="7500"
                     data-name="Capisso"
-                    data-description="Capisso VMPanel ($100.00)">
+                    data-description="Capisso VMPanel ($75.00)">
                 </script>
             {{ Form::close() }}
             <p>If you'd like additional ways to pay, let us know at help@capisso.org</p>
