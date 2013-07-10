@@ -11,14 +11,16 @@ use Sentry;
 use Ticket;
 use TicketResponse;
 
-class SupportController extends \BaseController {
+class SupportController extends \BaseController
+{
 
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index() {
+    public function index()
+    {
         $tickets = Ticket::where('user_id', Sentry::getUser()->id)->orderBy('created_at', 'desc')->get();
 
         return View::make('panel/support/index', array('tickets' => $tickets));
@@ -29,7 +31,8 @@ class SupportController extends \BaseController {
      *
      * @return Response
      */
-    public function create() {
+    public function create()
+    {
 
         return View::make('panel/support/create');
     }
@@ -39,14 +42,15 @@ class SupportController extends \BaseController {
      *
      * @return Response
      */
-    public function store() {
+    public function store()
+    {
         $rules = array(
             'title' => 'required|max:255',
             'body' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return Redirect::action('Panel\SupportController@create')->withErrors($validator);
         }
 
@@ -68,20 +72,39 @@ class SupportController extends \BaseController {
      *
      * @return Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         $ticket = Ticket::find($id);
-        if($ticket->user_id != Sentry::getUser()->id) {
+        if ($ticket->user_id != Sentry::getUser()->id) {
             return Redirect::action('Panel\SupportController@index');
         }
 
         $author = $ticket->author;
         $responses = $ticket->responses;
 
-        return View::make('panel/support/show', array(
-            'ticket' => $ticket,
-            'author' => $author,
-            'responses' => $responses
-        ));
+        switch ($ticket->status) {
+            case 'resolved':
+                $status_color = 'success';
+                break;
+
+            case 'follow-up':
+                $status_color = 'warning';
+                break;
+
+            default:
+                $status_color = 'default';
+                break;
+        }
+
+        return View::make(
+            'panel/support/show',
+            array(
+                'ticket' => $ticket,
+                'author' => $author,
+                'status_color' => $status_color,
+                'responses' => $responses
+            )
+        );
     }
 
     /**
@@ -91,7 +114,8 @@ class SupportController extends \BaseController {
      *
      * @return Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         //
     }
 
@@ -102,18 +126,19 @@ class SupportController extends \BaseController {
      *
      * @return Response
      */
-    public function update($id) {
+    public function update($id)
+    {
         $rules = array(
             'body' => 'required'
         );
 
         $validator = Validator::make(Input::all(), $rules);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return Redirect::action('Panel\SupportController@create')->withErrors($validator);
         }
 
         $ticket = Ticket::find($id);
-        if($ticket->user_id != Sentry::getUser()->id) {
+        if ($ticket->user_id != Sentry::getUser()->id) {
             return Redirect::action('Panel\SupportController@index');
         }
 
@@ -136,7 +161,8 @@ class SupportController extends \BaseController {
      *
      * @return Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         //
     }
 }

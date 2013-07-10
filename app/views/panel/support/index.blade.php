@@ -27,6 +27,7 @@
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Status</th>
                     <th>Created At</th>
                     <th>Last Update</th>
                 </tr>
@@ -36,6 +37,7 @@
             @foreach($tickets as $ticket)
                 <tr>
                     <td><a href="/panel/support/{{$ticket->id}}">{{{$ticket->title}}}</a></td>
+                    <td>{{ ucfirst($ticket->status) }}</td>
                     <td>{{$ticket->created_at}}</td>
                     <td>{{$ticket->updated_at}}</td>
                 </tr>

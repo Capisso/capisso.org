@@ -13,6 +13,7 @@
         <hr>
 
         <h3>{{{$ticket->title}}} <small>by {{$author->username}}</small></h3>
+        <span class="label label-{{ $status_color }} pull-right">{{ $ticket->status }}</span>
         <div class="well">{{{$ticket->body}}}</div>
 
         <hr>
