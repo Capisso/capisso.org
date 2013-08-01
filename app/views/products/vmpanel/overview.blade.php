@@ -65,6 +65,8 @@
                 </p>
             </div>
             <script src="//gttp.co/v1.js"></script>
+
+            <div class="github-widget" data-repo="Capisso/VMPanel"></div>
         </div>
 
         <h3>Screenshots</h3>
