@@ -50,12 +50,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">VMPanel <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li class="{{(Request::is('vmpanel/overview') ? 'active' : '')}}"><a href="/vmpanel/overview">Overview</a></li>
-                            <li class="{{(Request::is('vmpanel/licensing') ? 'active' : '')}}"><a href="/vmpanel/licensing">Licensing</a></li>
                             <li class="{{(Request::is('vmpanel/features') ? 'active' : '')}}"><a href="/vmpanel/features">Features</a></li>
                             <li class="{{(Request::is('vmpanel/screenshots') ? 'active' : '')}}"><a href="/vmpanel/screenshots">Screenshots</a></li>
                         </ul>
                     </li>
-                    <li class="{{(Request::is('company') ? 'active' : '')}}"><a href="/company">Company</a></li>
                     <li class="{{(Request::is('irc') ? 'active' : '')}}"><a href="/irc">IRC</a></li>
                     <li class="{{(Request::is('contact') ? 'active' : '')}}"><a href="/contact">Contact</a></li>
 
